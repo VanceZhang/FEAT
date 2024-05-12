@@ -1,28 +1,18 @@
-import torch
 import os.path as osp
-from PIL import Image
 
+import numpy as np
 from torch.utils.data import Dataset
 from torchvision import transforms
-from tqdm import tqdm
-import numpy as np
 
 THIS_PATH = osp.dirname(__file__)
 ROOT_PATH = osp.abspath(osp.join(THIS_PATH, '..', '..'))
 ROOT_PATH2 = osp.abspath(osp.join(THIS_PATH, '..', '..', '..'))
-IMAGE_PATH1 = osp.join(ROOT_PATH2, 'data/miniimagenet/images')
-SPLIT_PATH = osp.join(ROOT_PATH, 'data/miniimagenet/split')
+IMAGE_PATH1 = osp.join(ROOT_PATH2, 'data/My/images')
+SPLIT_PATH = osp.join(ROOT_PATH, 'data/My/split')
 CACHE_PATH = osp.join(ROOT_PATH, '.cache/')
 
 
-def identity(x):
-    return x
-
-
-class MiniImageNet(Dataset):
-    """ Usage:
-    """
-
+class MyCustomDatasetSample(Dataset):
     def __init__(self, setname, args, augment=False):
         im_size = args.orig_imsize
         csv_path = osp.join(SPLIT_PATH, setname + '.csv')

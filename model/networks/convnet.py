@@ -1,5 +1,6 @@
 import torch.nn as nn
 
+
 # Basic ConvNet with Pooling layer
 def conv_block(in_channels, out_channels):
     return nn.Sequential(
@@ -11,6 +12,12 @@ def conv_block(in_channels, out_channels):
 
 
 class ConvNet(nn.Module):
+    """
+    4层卷积网络
+    隐藏层维度为64
+    输出层维度为64
+    输出后接全局平均池化
+    """
 
     def __init__(self, x_dim=3, hid_dim=64, z_dim=64):
         super().__init__()
@@ -24,6 +31,5 @@ class ConvNet(nn.Module):
     def forward(self, x):
         x = self.encoder(x)
         x = nn.MaxPool2d(5)(x)
-        x = x.view(x.size(0), -1)
+        x = x.view(x.size(0), -1)  # 输出维度为[batch_size, 64]
         return x
-

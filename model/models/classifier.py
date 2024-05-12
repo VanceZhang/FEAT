@@ -37,6 +37,12 @@ class Classifier(nn.Module):
         return out
     
     def forward_proto(self, data_shot, data_query, way = None):
+        """
+        前向传播，计算logits
+        Args:
+            data_shot: [num_class * shot, ...]
+            data_query: [num_class * query, ...]
+        """
         if way is None:
             way = self.args.num_class
         proto = self.encoder(data_shot)
